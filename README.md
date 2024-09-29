@@ -13,14 +13,14 @@ A lo largo de esta guía, exploraremos cómo puedes utilizar SQL para consultar,
 
 ## Desarrollo
 
-## COMANDO AS
+### COMANDO AS
 El comando AS en SQL se usa para asignar un alias (un nombre temporal) a una tabla o columna en una consulta. Esto hace que sea más fácil leer y referenciar los resultados.
 
 ```sql
 SELECT * FirstName AS Nombre, LastName AS Apellido FROM Employees;
 ```
 
-## ORDER BY ASC
+### ORDER BY ASC
 El comando ORDER BY ASC en SQL se utiliza para ordenar los resultados de una consulta en orden ascendente (de menor a mayor).
 
 ```sql
