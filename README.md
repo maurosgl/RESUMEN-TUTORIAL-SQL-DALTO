@@ -146,3 +146,183 @@ El comando WHERE NOT en SQL se utiliza para filtrar los resultados de una consul
 SELECT * FROM Customers
 WHERE NOT Country = 'USA';
 ```
+
+### WHERE NOT / AND NOT
+
+```sql
+SELECT * FROM Customers
+WHERE NOT Country = 'USA' AND NOT Country = 'France';
+```
+
+### WHERE / AND / AND NOT
+
+```sql
+SELECT * FROM Customers
+WHERE CustomerID >= 50 AND CustomerID <55
+AND NOT Country = 'Germany'
+```
+
+### LIMIT
+El comando LIMIT en SQL se utiliza para restringir el número de registros devueltos por una consulta. Es especialmente útil cuando deseas obtener solo un número específico de filas de un conjunto de resultados.
+
+```sql
+SELECT * FROM Customers
+WHERE CustomerID >= 50
+AND NOT Country = 'Germany'
+AND NOT Country = 'UK'
+AND NOT Country = 'Argentina'
+LIMIT 5;
+```
+
+### OPERADOR LÓGICO DISTINTO DE !=
+El operador != en SQL se utiliza para comparar dos valores y verificar si son diferentes. Es un operador de desigualdad.
+Uso básico:
+Se utiliza en cláusulas como WHERE para filtrar registros que no cumplen con una condición específica.
+
+```sql
+SELECT * FROM Customers WHERE Country != 'USA';
+```
+
+### WHERE NOT BETWEEN
+Este enfoque es útil cuando necesitas identificar registros que están fuera de un rango específico, como buscar productos que no caen dentro de un intervalo de precios, fechas, o cualquier otra métrica que estés analizando.
+
+```sql
+SELECT * FROM Products WHERE NOT Price BETWEEN 20 AND 40;
+```
+
+### FILTRO POR FECHAS
+
+```sql
+SELECT * FROM Employees WHERE BirthDate BETWEEN '1960-0-1' AND '1970-0-1';
+```
+
+### OPERADOR LIKE
+
+El operador LIKE en SQL se utiliza para buscar patrones en columnas de tipo texto. El símbolo % es un comodín que representa cero o más caracteres en una búsqueda.
+Uso básico de LIKE %:
+•	LIKE 'patrón%': Encuentra valores que comienzan con "patrón".
+•	LIKE '%patrón': Encuentra valores que terminan con "patrón".
+•	LIKE '%patrón%': Encuentra valores que contienen "patrón" en cualquier parte.
+Ejemplo:
+Supongamos que tienes una tabla llamada Productos y quieres encontrar todos los productos que contienen la palabra "manzana":
+sql
+Copiar código
+SELECT nombre_producto
+FROM Productos
+WHERE nombre_producto LIKE '%manzana%';
+Esto devolverá todos los productos que tienen "manzana" en su nombre, sin importar su posición.
+Resumen:
+•	LIKE % se utiliza para realizar búsquedas flexibles en columnas de texto, facilitando la localización de coincidencias basadas en patrones.
+
+```sql
+SELECT * FROM Employees WHERE LastName LIKE '%ller';
+```
+
+### OPERADOR LIKE A% (Encuentra valores que inicien con esa cadena de texto)
+
+```sql
+SELECT * FROM Employees WHERE LastName LIKE 'B%';
+```
+
+### OPERADOR LIKE %A% (Encuentra valores que contengan lo ingresado)
+
+```sql
+SELECT * FROM Employees WHERE LastName LIKE '%B%';
+```
+
+### OPERADOR IN
+
+```sql
+SELECT * FROM Employees
+WHERE LastName IN ("Fuller", "King");
+```
+
+### NOT IN
+
+```sql
+SELECT * FROM Employees
+WHERE LastName NOT IN ("Fuller", "King");
+```
+
+## FUNCIONES DE AGREGACIÓN
+
+### COUNT()
+
+```sql
+SELECT COUNT(FirstName) FROM Employees;
+```
+
+### SUM()
+
+```sql
+SELECT SUM(Price) FROM Employees;
+```
+
+### AVG()
+
+```sql
+SELECT AVG(Price) FROM Employees;
+```
+
+### ROUND
+
+```sql
+SELECT ROUND(AVG(Price),2) AS Promedio_precio FROM Products;
+```
+
+### MIN
+
+```sql
+SELECT ProductName, MIN(Price) AS precio_minimo FROM Products
+WHERE ProductName IS NOT NULL;
+```
+
+### MAX
+
+```sql
+SELECT ProductName, MAX(Price) AS precio_maximo FROM Products
+WHERE ProductName IS NOT NULL;
+```
+
+### GROUP BY
+
+```sql
+SELECT CategoryID, ROUND(AVG(Price)) AS promedio FROM Products
+WHERE CategoryID IS NOT NULL
+GROUP BY CategoryID;
+```
+
+### HAVING
+
+```sql
+SELECT CategoryID, ROUND(AVG(Price)) AS promedio FROM Products
+WHERE CategoryID IS NOT NULL
+GROUP BY CategoryID
+HAVING promedio > 40;
+```
+
+## SUBCONSULTAS
+
+```sql
+SELECT ProductID,
+  SUM(Quantity) as total_vendido,
+  (SELECT Price FROM Products WHERE ProductID = OD.ProductID) AS Price,
+  ROUND(SUM(Quantity) * (SELECT Price FROM Products WHERE ProductID = OD.ProductID))) AS ventas_totales
+FROM [OrderDetails] OD
+GROUP BY ProductID
+ORDER BY ventas_totales DESC;
+```
+
+### SUBCONSULTA EN EL FROM
+
+```sql
+SELECT * FROM(
+SELECT ProductID,
+  SUM(Quantity) as total_vendido,
+  (SELECT Price FROM Products WHERE ProductID = OD.ProductID) AS Price,
+  ROUND(SUM(Quantity) * (SELECT Price FROM Products WHERE ProductID = OD.ProductID))) AS ventas_totales
+FROM [OrderDetails] OD
+WHERE (SELECT Price FROM Products WHERE ProductID = OD.ProductID) > 40
+GROUP BY ProductID
+ORDER BY ventas_totales ASC);
+```
