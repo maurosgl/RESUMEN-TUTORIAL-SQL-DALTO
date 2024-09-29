@@ -1,8 +1,5 @@
 # Resumen tutorial: SQL Desde Cero (SoyDalto)
-## Contenido
 
-
-## Introducción
 SQL es el lenguaje fundamental que alimenta las bases de datos y facilita la transformación de simples conjuntos de datos en información valiosa. En un mundo impulsado por datos, el dominio de SQL es una habilidad imprescindible para quienes buscan tomar decisiones basadas en evidencia y construir soluciones robustas. 
 
 Este manual te guiará paso a paso, desde los conceptos más básicos hasta las técnicas avanzadas que te permitirán dominar SQL con seguridad. Y lo haremos utilizando uno de los entornos más clásicos y completos para aprender bases de datos: Northwind, una base de datos que simula el funcionamiento de una compañía ficticia de importación y exportación.
@@ -10,6 +7,7 @@ Este manual te guiará paso a paso, desde los conceptos más básicos hasta las 
 A lo largo de esta guía, exploraremos cómo puedes utilizar SQL para consultar, analizar y manipular datos en un contexto empresarial realista. Ya seas un principiante absoluto o alguien con experiencia en SQL, este manual tiene algo para ti: Con ejemplos prácticos desarrollados paso a paso, desglosamos conceptos de manera accesible, asegurándonos de que cada lección esté conectada a un uso práctico en la vida real, ayudándote a entender cómo SQL puede potenciar tus proyectos y mejorar tu toma de decisiones.
 
 ¡Prepárate para sumergirte en el fascinante mundo del análisis y la gestión de datos con SQL!
+
 
 ## Desarrollo
 
